@@ -3,6 +3,7 @@
 -----------------------------------------------------------------------------
 -- File       : I2C_slave_TB
 -- Author     : Peter Samarin <peter.samarin@gmail.com>
+-- Author2	  : Modifications apportées par Tanguy Montoisy
 -----------------------------------------------------------------------------
 -- Copyright (c) 2014 Peter Samarin
 -----------------------------------------------------------------------------
@@ -15,6 +16,7 @@ use work.txt_util.all;
 entity I2C_slave_TB is
 end I2C_slave_TB;
 ------------------------------------------------------------------------
+
 architecture Testbench of I2C_slave_TB is
   file output_file            : text open write_mode is "Output.txt";
   constant T                  : time                         := 20 ns;  -- clk period
@@ -34,6 +36,10 @@ architecture Testbench of I2C_slave_TB is
   signal data_valid           : std_logic                    := '0';
   signal data_from_master     : std_logic_vector(7 downto 0) := (others => '0');
   signal data_from_master_reg : std_logic_vector(7 downto 0) := (others => '0');
+-- Je rajoute la ROM pour pouvoir entamer la partie 2 du projet à savoir
+-- y stocker les fonctions à effectuer par l'esclave (pour l'instant le fpga)
+component ROM
+------------------------------------------------------------------------
 begin
 
   ---- Design Under Verification -----------------------------------------
@@ -78,8 +84,12 @@ begin
     end if;
   end process;
 
+  ----------------------------------------------------------
+  -- 
+  ----------------------------------------------------------
   ----- Test vector generation -------------------------------------------
   TESTS : process is
+  -- Puis là boom il tape les dix milles procédures dont il aura besoin
 
     -- half clock
     procedure i2c_wait_half_clock is
@@ -428,6 +438,14 @@ begin
       state_dbg <= 6;
       i2c_stop;
     end procedure i2c_read_bytes;
+	 
+  ----------------------------------------------------------
+  --
+  ----------------------------------------------------------
+  -- Ici il va seulement commencer ses test
+  ----------------------------------------------------------
+  -- 
+  ----------------------------------------------------------
   begin
     scl_test <= '1';
     sda_test <= '1';
