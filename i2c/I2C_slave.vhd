@@ -20,6 +20,8 @@ entity I2C_slave is
 end entity I2C_slave;
 ------------------------------------------------------------
 architecture arch of I2C_slave is
+	-- Déclaration de son énumération
+	-- étapes de fonctionnement i2c
   type state_t is (i2c_idle, i2c_get_address_and_cmd,
                    i2c_answer_ack_start, i2c_write,
                    i2c_read, i2c_read_ack_start,
@@ -57,7 +59,10 @@ architecture arch of I2C_slave is
   signal data_valid_reg     : std_logic                    := '0';
   signal read_req_reg       : std_logic                    := '0';
   signal data_to_master_reg : std_logic_vector(7 downto 0) := (others => '0');
-begin
+
+ ------------------------------------------------------------
+
+ begin
   process (clk) is
   begin
     if rising_edge(clk) then

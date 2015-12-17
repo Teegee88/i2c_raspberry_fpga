@@ -38,7 +38,7 @@ architecture Testbench of I2C_slave_TB is
   signal data_from_master_reg : std_logic_vector(7 downto 0) := (others => '0');
 -- Je rajoute la ROM pour pouvoir entamer la partie 2 du projet à savoir
 -- y stocker les fonctions à effectuer par l'esclave (pour l'instant le fpga)
-component ROM
+--component ROM
 ------------------------------------------------------------------------
 begin
 
@@ -442,7 +442,7 @@ begin
   ----------------------------------------------------------
   --
   ----------------------------------------------------------
-  -- Ici il va seulement commencer ses test
+  -- Ici il va seulement commencer ses tests
   ----------------------------------------------------------
   -- 
   ----------------------------------------------------------
